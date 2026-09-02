@@ -1,0 +1,61 @@
+\section{Work Experience}
+\label{sec: Work Experience}
+
+\begin{tabularx}{\linewidth}{ @{}l r@{} }
+\textbf{1. Embedded SWE | SRE }
+& \hfill
+January, 2023 - Present \\[3.75pt]
+JaduPc Ltd. | Dhaka, Bangladesh | Part-time (hybrid)
+& \hfill \\[3.75pt]
+\multicolumn{2}{@{}X@{}}{
+\begin{minipage}[t]{\linewidth}
+    \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt]
+
+        \item[--] Design the CI pipeline for managed debian packages & repository.
+        \item[--] Design & Develop toolchain for automated cross-compilation of managed debian packages.
+        \item[--] Reverse-engineer boot chain(s) of target SBC(s) and reimplement them in internal fork of Armbian.
+        \item[--] Design and develop a pseudo-PMIC providing ATX-style power control for an SBC without dedicated PM:
+		\begin{itemize}[nosep,after=\strut, leftmargin=1.5em, itemsep=1pt]
+		    \item[--] Implement power-button state machine with short/long-press handling and forced power-off.
+		    \item[--] Implement power-up validation with timeout-based recovery.
+		    \item[--] Implement state-dependent LED status indication.
+		    \item[--] Implement configurable timing and status indication with zero-cost abstractions.
+		\end{itemize}
+        \item[--] Manage the On-Premise Server hosting OTA, Analytics, Git and CI Scheduler.
+        \item[--] Maintain documentation covering CI, package maintenance, architecture, and hardware quirks.
+		\item[--] Reconstruct and rewrite the firmware of an experimental Vehicle Tracking System from board schematics and feature specifications:
+			\begin{itemize}[nosep,after=\strut, leftmargin=1.5em, itemsep=1pt]
+				\item[--] Introduce asynchronous processing with local logging.
+				\item[--] Introduce a failed-publication queue with opportunistic draining within the cycle budget.
+				\item[--] Preserve message ordering using Unix-epoch timestamps as sequence identifiers.
+				\item[--] Implement publication pacing to enforce self-imposed rate limits.
+				\item[--] Decouple sensor collectors, serializers, and consumers into configurable, fail-safe subsystems.
+				\item[--] Support multiple publication formats through build-time configuration.
+				\item[--] Migrate telemetry transport from REST/JSON to MQTT/Protocol Buffers.
+			    \item[--] Develop host-side tooling for message decoding, visualization, and protocol inspection.
+			\end{itemize}
+
+    \end{itemize}
+    \end{minipage}
+}  \\
+\end{tabularx}
+
+
+\begin{tabularx}{\linewidth}{ @{}l r@{} }
+\textbf{2. Research Assistant | Infrastructure Engineer}
+& \hfill
+May, 2026 - Present \\[3.75pt]
+Md Zahurul Haque / AutoDocker | Manarat International University, Dhaka, Bangladesh | Part-time (Remote)
+& \hfill \\[3.75pt]
+\multicolumn{2}{@{}X@{}}{
+\begin{minipage}[t]{\linewidth}
+    \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt]
+		\item[--] Design and maintain multi-stage Docker builds integrating AutoDock Vina, SMINA, QuickVina2, FPocket, OpenBabel, and NGL.
+		\item[--] Develop build and dependency tooling for native scientific software and minimal runtime images.
+		\item[--] Design CI workflows for automated testing, container builds, and end-to-end integration tests.
+		\item[--] Implement runtime dependency discovery, patch management, and reproducibility tooling.
+		\item[--] Implement ID-mapped rootless execution, capability dropping, and privilege isolation.
+    \end{itemize}
+    \end{minipage}
+}  \\
+\end{tabularx}
