@@ -6,55 +6,36 @@ on:
     branches:
       - main
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    env:
-      # Edit here with the names of your latex file and directory (can use ".")
-      DIR: .
-      FILE: cv
-    steps:
-      - name: Set up Git repository
-        uses: actions/checkout@v4
-      - name: cv
-        uses: dante-ev/latex-action@latest
-        with:
-          root_file: ${{ env.FILE }}
-          working_directory: ${{ env.DIR }}
-      - name: move
-        run: mkdir -p github_artifacts && mv ${{ env.DIR }}/${{ env.FILE }}.pdf ./github_artifacts/
-      - name: Upload pdf as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.FILE }}.pdf
-          path: ./github_artifacts
   deploy:
-    needs: [build]
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      pages: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
-        with:
-          path: github_artifacts
-      - name: move
-        run: mkdir -p github_deploy && mv github_artifacts/*/* github_deploy
-      - name: deploy on orphan branch
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./github_deploy
-          publish_branch: build
-          force_orphan: true
-          enable_jekyll: true
-  copy-index-to-build:
-    needs: [deploy]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Copy To Branches Action
-        uses: planetoftheweb/copy-to-branches@v1.3
-        env:
-          key: main
-          files: index.html CNAME
+    - name: Set up Git repository
+      uses: actions/checkout@v4
+
+    - name: cv
+      uses: dante-ev/latex-action@latest
+      with:
+        root_file: cv
+        working_directory: .
+
+    - name: Prepare artifacts
+      run: |
+          mkdir -p public
+          mv cv.pdf public/ahmad-hasan-mubashshir.pdf
+          sed -E 's/@PATH@/ahmad-hasan-mubashshir.pdf/' index.html > public/index.html
+
+    - name: Upload Site
+      uses: actions/upload-pages-artifact@v3
+      with:
+        name: github-pages
+        path: ./public
+        retention-days: 1
+
+    - name: Deploy Site
+      uses: actions/deploy-pages@v4
+
+# vim: ts=2:et
